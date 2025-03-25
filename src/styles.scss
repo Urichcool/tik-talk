@@ -1,3 +1,5 @@
+@use "fonts";
+
 :root{
     --dark-color: #000000;
     --light-color: #ffffff;
@@ -5,6 +7,7 @@
 }
 
 body{
+    font-family: "JetBrains Mono", sans-serif;
     background: var(--dark-color);
     color: var(--light-color);
 }
@@ -21,6 +24,22 @@ body{
 
 .btn{
     border: none;
+    font-family: "JetBrains Mono", sans-serif;
     background: var(--primary-color);
     color: var(--dark-color);
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.h6{
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 800;
+}
+
+.subtitle{
+    font-size: 14px;
+    line-height: 20px;
 }
