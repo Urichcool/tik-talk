@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login-page',
@@ -16,7 +17,8 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent {
   authService = inject(AuthService);
-  router = inject(Router)
+  router = inject(Router);
+  coockiService = inject(CookieService)
 
   form: FormGroup<{
     username: FormControl<string | null>;
@@ -26,16 +28,14 @@ export class LoginPageComponent {
     password: new FormControl<string | null>('', Validators.required),
   });
 
-
-
   onSubmit() {
     if (this.form.valid) {
       const formData = this.form.value as {
         username: string;
         password: string;
       };
-      this.authService.login(formData).subscribe(res => {
-this.router.navigate([''])
+      this.authService.login(formData).subscribe((res) => {
+        this.router.navigate(['']);
       });
     }
   }
