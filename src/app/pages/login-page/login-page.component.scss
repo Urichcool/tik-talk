@@ -9,3 +9,24 @@
 .login-form{
     width: 100%;
 }
+
+.password-input{
+    position: relative;
+}
+
+.password-eye-btn{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 58%;
+    right: 12px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #FFFFFFBF
+}
+
+.password-eye-btn.active{
+    color: var(--primary-color);
+}

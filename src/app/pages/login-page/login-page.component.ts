@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -18,7 +18,10 @@ import { CookieService } from 'ngx-cookie-service';
 export class LoginPageComponent {
   authService = inject(AuthService);
   router = inject(Router);
-  coockiService = inject(CookieService)
+
+  isPaswordVisible = signal<boolean>(false)
+
+  coockiService = inject(CookieService);
 
   form: FormGroup<{
     username: FormControl<string | null>;
