@@ -12,3 +12,14 @@ class="ml16 mb20"
         </li>
     </ul>
 </nav>
+
+<p class="medium-text mb20">Subscribers</p>
+
+<pre>{{subscribers$ | async}}</pre>
+
+<!-- <app-subscriber-card></app-subscriber-card> -->
+
+<div class="mt-20 to-subscribers">
+    <a class="to-subscribers-link medium-text" [routerLink]="['./subscribers']" >All subscribers</a>
+    <svg icon="arrow" class="to-subscribers-icon"></svg>
+</div>

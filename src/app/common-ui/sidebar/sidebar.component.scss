@@ -1,12 +1,14 @@
 :host {
   display: block;
   padding: 20px 12px;
+  background-color: var(--dark-color);
 }
 
 .main-menu-list {
   display: grid;
   grid-gap: 8px;
   list-style: none;
+padding: 0;
 }
 
 .menu-item {
@@ -39,4 +41,22 @@
 .menu-item svg{
     width: 16px;
     height: 16px;
+}
+
+
+.to-subscribers{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.to-subscribers-link{
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.to-subscribers-icon{
+  width: 18px;
+  height: 18px;
+  color: var(--primary-color);
 }
