@@ -27,6 +27,11 @@
   @if(me(); as me){ @if(me.avatarUrl){
   <img [src]="me.avatarUrl | imgUrl" alt="avatar" />
   }@else {
-  <img src="" alt="avatar" />
-  } }
+  <img src="/assets/imgs/avatar-placeholder.png" alt="avatar" />
+  } 
+<div class="medium-text username-text">{{me.username}}</div>
+<a [routerLink]="['settings']" class="settings-btn">
+  <svg icon="settings"></svg>
+</a>
+}
 </footer>
