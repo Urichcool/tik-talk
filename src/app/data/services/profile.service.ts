@@ -12,12 +12,14 @@ export class ProfileService {
   baseApiUrl = 'https://icherniakov.ru/yt-course/';
   me = signal<Profile | null>(null);
 
+getAccount(id:string){
+  return this.http.get<Profile>(`${this.baseApiUrl}account/${id}`)
+}
 
-
-  getSubscribersShortList() {
+  getSubscribersShortList(subsAmount:number = 3) {
     return this.http
       .get<Pagebale<Profile>>(`${this.baseApiUrl}account/subscribers/`)
-      .pipe(map((res) => res.items.slice(0, 3)));
+      .pipe(map((res) => res.items.slice(0, subsAmount)));
   }
 
   getTestAccounts() {
