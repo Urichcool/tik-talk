@@ -24,6 +24,9 @@ body{
     background-image: url(/assets/imgs/background.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
+    margin: 0;
+
+
 }
 
 .skill-tag{
@@ -125,4 +128,12 @@ line-height: 16px;
     line-height: 21px;
     font-family: "JetBrains Mono", sans-serif;
     color: var(--light-color);
+}
+
+.tt-form-label{
+
+}
+
+.tt-form-input{
+    
 }
