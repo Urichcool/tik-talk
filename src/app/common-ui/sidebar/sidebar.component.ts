@@ -21,7 +21,7 @@ export class SidebarComponent implements OnInit {
   me = this.profileService.me
 
   menuItems: { label: string; icon: string; link: string }[] = [
-    { label: 'My page', icon: 'home', link: '' },
+    { label: 'My page', icon: 'home', link: 'profile/me' },
     { label: 'Chats', icon: 'chats', link: 'chats' },
     { label: 'Search', icon: 'search', link: 'search' },
   ];

@@ -1,10 +1,6 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { ProfileHeaderComponent } from '../../common-ui/profile-header/profile-header.component';
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileService } from '../../data/services/profile.service';
 import { firstValueFrom } from 'rxjs';
 
@@ -26,10 +22,13 @@ export class SettingsPageComponent {
     stack: [''],
   });
 
- constructor() {
+  constructor() {
     effect(() => {
       //@ts-ignore
-     this.form.patchValue(this.profileService.me()) ;
+      this.form.patchValue({
+        ...this.profileService.me(),
+        stack: this.mergeStack(this.profileService.me()?.stack),
+      });
     });
   }
 
@@ -37,9 +36,27 @@ export class SettingsPageComponent {
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
 
-    if(this.form.invalid) return;
+    if (this.form.invalid) return;
 
-//@ts-ignore
-firstValueFrom(this.profileService.patchProfile(this.form.value)) 
+    //@ts-ignore
+    firstValueFrom(
+      //@ts-ignore
+      this.profileService.patchProfile({
+        ...this.form.value,
+        stack: this.splitStack(this.form.value.stack),
+      })
+    );
+  }
+
+  splitStack(stack: string | null | string[] | undefined): string[] {
+    if (!stack) return [];
+    if (Array.isArray(stack)) return stack;
+    return stack.split(',');
+  }
+
+  mergeStack(stack: string | null | string[] | undefined) {
+    if (!stack) return '';
+    if (Array.isArray(stack)) return stack.join(',');
+    return stack;
   }
 }

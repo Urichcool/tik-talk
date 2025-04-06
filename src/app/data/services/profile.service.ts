@@ -12,18 +12,18 @@ export class ProfileService {
   baseApiUrl = 'https://icherniakov.ru/yt-course/';
   me = signal<Profile | null>(null);
 
-getAccount(id:string){
-  return this.http.get<Profile>(`${this.baseApiUrl}account/${id}`)
-}
+  getAccount(id: string) {
+    return this.http.get<Profile>(`${this.baseApiUrl}account/${id}`);
+  }
 
-  getSubscribersShortList(subsAmount:number = 3) {
+  getSubscribersShortList(subsAmount: number = 3) {
     return this.http
       .get<Pagebale<Profile>>(`${this.baseApiUrl}account/subscribers/`)
       .pipe(map((res) => res.items.slice(0, subsAmount)));
   }
 
-  patchProfile(profile: Partial<Profile>){
-return this.http.patch<Profile>(`${this.baseApiUrl}account/me`, profile)
+  patchProfile(profile: Partial<Profile>) {
+    return this.http.patch<Profile>(`${this.baseApiUrl}account/me`, profile);
   }
 
   getTestAccounts() {
@@ -33,6 +33,6 @@ return this.http.patch<Profile>(`${this.baseApiUrl}account/me`, profile)
   getMe() {
     return this.http
       .get<Profile>(`${this.baseApiUrl}account/me`)
-      .pipe(tap((res) => (this.me.set(res))));
+      .pipe(tap((res) => this.me.set(res)));
   }
 }

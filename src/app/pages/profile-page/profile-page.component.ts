@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { ProfileHeaderComponent } from "../../common-ui/profile-header/profile-header.component";
 import { ProfileService } from '../../data/services/profile.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -8,6 +8,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { SvgIconComponent } from "../../common-ui/svg-icon/svg-icon.component";
 import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
 import { PostFeedComponent } from "./post-feed/post-feed.component";
+import { Profile } from '../../data/interfaces/profile.interface';
 
 @Component({
   selector: 'app-profile-page',
@@ -20,6 +21,7 @@ profileService = inject(ProfileService);
 route = inject(ActivatedRoute);
 me$ = toObservable(this.profileService.me)
 subscribers$ = this.profileService.getSubscribersShortList(5);
+profile = input<Profile>()
 
 profile$ = this.route.params.pipe(
 switchMap(({id}) => {
