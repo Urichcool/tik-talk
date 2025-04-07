@@ -35,4 +35,10 @@ export class ProfileService {
       .get<Profile>(`${this.baseApiUrl}account/me`)
       .pipe(tap((res) => this.me.set(res)));
   }
+
+  uploadAvatar(file: File){
+    const fd:FormData = new FormData;
+    fd.append("image", file)
+    return this.http.post<Profile>(`${this.baseApiUrl}account/upload_image`, fd);
+  }
 }

@@ -1,34 +1,41 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, NgModule, signal, WritableSignal } from '@angular/core';
 import { SvgIconComponent } from '../../../common-ui/svg-icon/svg-icon.component';
 import { DndDirective } from '../../../common-ui/directives/dnd.directive';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-avatar-upload',
-  imports: [SvgIconComponent, DndDirective],
+  imports: [SvgIconComponent, DndDirective, FormsModule],
   templateUrl: './avatar-upload.component.html',
-  styleUrl: './avatar-upload.component.scss'
+  styleUrl: './avatar-upload.component.scss',
 })
 export class AvatarUploadComponent {
-preview:WritableSignal<string> = signal<string>('/assets/imgs/avatar-placeholder.png')
+  preview: WritableSignal<string> = signal<string>(
+    '/assets/imgs/avatar-placeholder.png'
+  );
 
-fileBrowserHandler(event:Event){
-const file = (event.target as HTMLInputElement)?.files?.[0]
+  avatar:File | null = null
 
-this.processFile(file)
-}
+  fileBrowserHandler(event: Event) {
+    const file = (event.target as HTMLInputElement)?.files?.[0];
 
-onFileDroped(file:File){
-  this.processFile(file)
-}
+    this.processFile(file);
+  }
 
-processFile(file: File | null | undefined){
-  if(!file || !file.type.match('image')) return
+  onFileDroped(file: File) {
+    this.processFile(file);
+  }
 
-const reader = new FileReader();
+  processFile(file: File | null | undefined) {
+    if (!file || !file.type.match('image')) return;
 
-reader.onload = event => {
-  this.preview.set(event.target?.result?.toString() ?? "")
-}
-reader.readAsDataURL(file)
-}
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      this.preview.set(event.target?.result?.toString() ?? '');
+    };
+    reader.readAsDataURL(file);
+    this.avatar = file
+  }
 }

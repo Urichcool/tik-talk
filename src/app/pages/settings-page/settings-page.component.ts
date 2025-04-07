@@ -1,10 +1,10 @@
-import { Component, effect, inject } from '@angular/core';
+import { AfterViewInit, Component, effect, inject, OnInit, ViewChild } from '@angular/core';
 import { ProfileHeaderComponent } from '../../common-ui/profile-header/profile-header.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileService } from '../../data/services/profile.service';
 import { firstValueFrom } from 'rxjs';
 import { AvatarUploadComponent } from "./avatar-upload/avatar-upload.component";
-import { SvgIconComponent } from '../../common-ui/svg-icon/svg-icon.component';
+
 
 @Component({
   selector: 'app-settings-page',
@@ -12,9 +12,11 @@ import { SvgIconComponent } from '../../common-ui/svg-icon/svg-icon.component';
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss',
 })
-export class SettingsPageComponent {
+export class SettingsPageComponent implements AfterViewInit {
   fb = inject(FormBuilder);
   profileService = inject(ProfileService);
+
+  @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent
 
   form = this.fb.group({
     firstName: ['', Validators.required],
@@ -34,12 +36,19 @@ export class SettingsPageComponent {
     });
   }
 
+  ngAfterViewInit(){
+this.avatarUploader.avatar
+  }
+
   onSave() {
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
 
     if (this.form.invalid) return;
 
+    if(this.avatarUploader.avatar){
+     firstValueFrom(this.profileService.uploadAvatar(this.avatarUploader.avatar)) 
+    }
     //@ts-ignore
     firstValueFrom(
       //@ts-ignore

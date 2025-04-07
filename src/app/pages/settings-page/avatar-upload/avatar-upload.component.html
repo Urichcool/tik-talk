@@ -1,10 +1,20 @@
-<img [src]="preview()" alt="avatar-placeholder" class="avatar">
+<img [src]="preview()" alt="avatar-placeholder" class="avatar" />
 
-<div dnd class="dropzone" (keyup.enter) = "fileDrop.click()" (fileDroped)="onFileDroped($event)">
-    <div class="dropzone-content">
-        <svg icon="upload"></svg>
-        <span class="medium-text">Grab your picture here or Upload</span>
-    </div>
-<input tabindex="-1" class="avatar-input" type="file" #fileDrop (change) = "fileBrowserHandler($event)">
-
+<div
+  dnd
+  class="dropzone"
+  (keyup.enter)="fileDrop.click()"
+  (fileDroped)="onFileDroped($event)"
+>
+  <div class="dropzone-content">
+    <svg icon="upload"></svg>
+    <span class="medium-text">Grab your picture here or Upload</span>
+  </div>
+  <input
+    tabindex="-1"
+    class="avatar-input"
+    type="file"
+    #fileDrop
+    (change)="fileBrowserHandler($event)"
+  />
 </div>
